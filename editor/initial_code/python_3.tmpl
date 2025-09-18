@@ -1,21 +1,65 @@
 {% comment %}New initial code template{% endcomment %}
 {% block env %}{% endblock env %}
 
+ATOMIC_NUMBERS = {
+    "H": 1,
+    "He": 2,
+    "Li": 3,
+    "O": 8,
+    "Na": 11,
+    "Al": 13,
+    "Cl": 17,
+    "Ar": 18,
+    "K": 19,
+    "V": 23,
+    "Br": 35,
+    "Kr": 36,
+    "Rb": 37,
+    "In": 49,
+    "I": 53,
+    "Xe": 54,
+    "Ir": 77,
+    "Tl": 81,
+    "Rn": 86,
+    "Fr": 87,
+    "Db": 105,
+    "Ds": 110,
+    "Uus": 117,
+    "Uuo": 118
+}
+
+NOBLE_GASES = [
+    "He",
+    "Ne",
+    "Ar",
+    "Kr",
+    "Xe",
+    "Rn",
+    "Uuo"
+]
+
+ORBITAL_CAPACITIES = {
+    "s": 2,
+    "p": 6,
+    "d": 10,
+    "f": 14
+}
+
 {% block start %}
-def sum_two(a: int, b: int) -> int:
+def notation(element: str) -> str:
     # your code here
-    return 0
+    return ""
 {% endblock start %}
 
 {% block example %}
 print('Example:')
-print(sum_two(1, 2))
+print(notation("He"))
 {% endblock %}
 
 # These "asserts" are used for self-checking
 {% block tests %}
 {% for t in tests %}
-assert {% block call %}sum_two({{t.input|p_args}})
+assert {% block call %}notation({{t.input|p_args}})
 {% endblock %} == {% block result %}{{t.answer|p}}{% endblock %}{% endfor %}
 {% endblock %}
 

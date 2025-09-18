@@ -1,20 +1,83 @@
 <!-- Describe task in general -->
-<!-- <img src="{{MEDIA_CONVERT}}title.png" class="title_img" /> -->
+<img src="{{MEDIA_CONVERT}}title.png" class="title_img" />
 <p style="text-align: justify;">
-    Sum two passed ints
+    Electron configuration is a standardized notational method for describing the arrangement of electrons in an atom's orbitals. The task requires a specific shorthand form known as Noble Gas Notation. This notation provides a condensed representation by using the symbol of the previous noble gas element (if existed) in brackets as a stand-in for the core. The remaining electrons are then listed in the standard configuration format.
 </p>
 
-<p style="text-align: center;">
-    <img  title="example" src="{{MEDIA}}example.png" alt="example" style="max-height: 83px"/>
+<p style="text-align: justify;"><i>
+    For example, Neon (Ne) has an atomic number of 10 and a full configuration of 1s<sup>2</sup>2s<sup>2</sup>2p<sup>6</sup>. The noble gas notation for Argon (Ar, Z=18) is therefore [Ne]3s<sup>2</sup>3p<sup>6</sup>, as the [Ne] core accounts for the first ten electrons, and the remaining eight are filled into the 3s and 3p subshells.
+</i></p>
+
+<p style="text-align: justify;">
+    The state of an electron within an atom is precisely described by a set of four quantum numbers. These numbers serve as a unique "address" for each electron, providing a comprehensive description of its energy, spatial distribution, and spin. Let's break down two of them:
 </p>
+
+<p style="text-align: justify;">
+    <strong>Principal Quantum Number (n)</strong>: This number describes the main energy level or shell in which the electron resides. Higher values of <strong>n</strong> correspond to higher energy levels and a greater average distance of the electron from the nucleus, consequently increasing the atomic radius. The value of <strong>n</strong> can be any positive integer (e.g., 1, 2, 3...).
+</p>
+
+<p style="text-align: justify;">
+    <strong>Angular Quantum Number (l)</strong>: Also known as the orbital quantum number, this value determines the shape of the electron's orbital and the type of subshell. The values of <strong>l</strong> correspond to specific orbital types: 0 for s-orbitals, 1 for p-orbitals, 2 for d-orbitals, and 3 for f-orbitals.
+</p>
+
+<p style="text-align: justify;">
+    The process of assigning electrons to orbitals is not random but follows a series of established quantum mechanical principles. Let's explore one of the key rules that govern this process:
+</p>
+
+<p style="text-align: justify;">
+    <strong>Klechkowski's Rule (n+l Rule)</strong>. This rule provides the specific, systematic order for filling orbitals. It states that orbitals are filled in the order of increasing (n+l) values. A secondary condition of the rule resolves ties: if two orbitals have the same (n+l) value, the one with the lower principal quantum number n is filled first. For example, the 3d orbital (n=3, l=2) and the 4p orbital (n=4, l=1) both have an (n+l) value of 5, but since n=3 for the 3d orbital is lower than n=4 for the 4p orbital, the 3d orbital is filled first.
+</p>
+
+<p style="text-align: justify;">
+    The process for generating the noble gas notation is a systematic, multi-step algorithm that builds upon the atomic number (with example for Aluminum).
+</p>
+
+<ul>
+    <li>
+        <p style="text-align: justify;">
+            <strong>Determine Electron Count</strong>: The total number of electrons is equal to the atomic number (Z) of the element (<code>ATOMIC_NUMBERS</code> dictionary of some elements symbols and their atomic numbers).
+        </p>
+        <p style="text-align: justify;"><i>
+            Aluminum (Al) has an atomic number (Z) of 13. This means a neutral Aluminum atom has 13 electrons.
+        </i></p>
+    </li>
+    <li>
+        <p style="text-align: justify;">
+            <strong>Identify Noble Gas Core</strong>: Consult a reference set of noble gases Helium, Neon, Argon, Krypton, Xenon, Radon, Ununoctium (<code>NOBLE_GASES</code> list of symbols) and find the one with the highest atomic number that is less than the target element's Z. The symbol of this noble gas, enclosed in brackets, becomes the start of the notation. The number of electrons represented by this core is subtracted from the total electron count to determine the remaining electrons that need to be filled.
+        </p>
+        <p style="text-align: justify;"><i>
+            For Aluminum (Z=13), the nearest noble gas with a lower atomic number is Neon (Ne, Z=10). Thus, the notation starts with [Ne], and we have 3 electrons left to place (13 - 10 = 3).
+        </i></p>
+    </li>
+    <li>
+        <p style="text-align: justify;">
+            The remaining electrons are added to orbitals in the order specified by <strong>Klechkowski's Rule (n+l rule)</strong>. The algorithm must iterate through the sequence of orbitals (spdf order), filling each one to its maximum capacity (<code>ORBITAL_CAPACITIES</code> dictionary of orbitals and their capacities) until all remaining electrons are placed.
+        </p>
+        <p style="text-align: justify;"><i>
+            The electron configuration for Neon is 1s<sup>2</sup>2s<sup>2</sup>2p<sup>6</sup>. The orbital with the next lowest n+l value after 2p (2+1=3) is the 3s orbital (3+0=3). The 3s orbital can hold a maximum of 2 electrons. We have 3 electrons remaining, so we place 2 electrons here, resulting in 3s<sup>2</sup>. We now have 1 electron left. The next orbital to fill is the 3p orbital (3+1=4). The 3p orbital can hold a maximum of 6 electrons. We have only 1 electron remaining, so we place it here, resulting in 3p<sup>1</sup>. All 13 electrons have now been accounted for (10 from the Neon core + 2 in the 3s orbital + 1 in the 3p orbital).
+        </i></p>
+    </li>
+</ul>
+
+<p style="text-align: justify;">
+    The final noble gas notation string should be constructed by concatenating the noble gas core with the sequential orbital terms, each of them must include principal quantum number, the letter representing the orbital type (s, p, d, f), and the number of electrons in that orbital. Each term should be separated by a space for clarity.
+</p>
+
+<p style="text-align: justify;"><i>
+    For Aluminum, the complete noble gas notation is <code>"[Ne] 3s2 3p1"</code>.
+</i></p>
+
+<!-- <p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}example.png" alt="example" style="max-height: 83px"/>
+</p> -->
 
 <!-- Explain input and output values -->
 <p>
-    <strong>Input:</strong> Two arguments. Both are ints.
+    <strong>Input:</strong> Symbol of element as string <span translate="no">(str{% if is_js %}ing{% endif %})</span>.
 </p>
 
 <p>
-    <strong>Output:</strong> Int. 
+    <strong>Output:</strong> Noble gas notation as string. 
 </p>
 
 
