@@ -33,7 +33,7 @@ TESTS = {
     ],
     "Extra": [
         {
-            "input": ["Uuo"],
+            "input": ["Og"],
             "answer": "[Rn] 5f14 6d10 7s2 7p6"
         },
         {
@@ -97,7 +97,7 @@ TESTS = {
             "answer": "[Kr] 5s1"
         },
         {
-            "input": ["Uus"],
+            "input": ["Ts"],
             "answer": "[Rn] 5f14 6d10 7s2 7p5"
         },
         {
