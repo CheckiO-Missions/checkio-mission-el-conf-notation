@@ -1,0 +1,105 @@
+<!-- Describe task in general -->
+<img src="{{MEDIA_CONVERT}}title.png" class="title_img" />
+<p style="text-align: justify;">
+    La configuration électronique est une méthode de notation normalisée permettant de décrire la disposition des électrons dans les orbitales d'un atome. Cette tâche nécessite une forme abrégée spécifique connue sous le nom de Notation des gaz rares. Cette notation fournit une représentation condensée en utilisant le symbole du gaz rare précédent (s'il existe) entre parenthèses comme substitut du noyau. Les électrons restants sont ensuite répertoriés dans le format de configuration standard.
+</p>
+
+<p style="text-align: justify;"><i>
+    Par exemple, le Néon (Ne) a un numéro atomique de 10 et une configuration complète de <sup>1s22s22p6</sup>. La notation des gaz rares pour l'argon (Ar, Z=18) est donc [Ne]<sup>3s23p6</sup>, car le noyau [Ne] représente les dix premiers électrons et les huit restants sont placés dans les sous-coquilles 3s et 3p.
+</i></p>
+
+<p style="text-align: justify;">
+    L'état d'un électron dans un atome est précisément décrit par un ensemble de quatre nombres quantiques. Ces nombres servent d'"adresse" unique pour chaque électron et fournissent une description complète de son énergie, de sa distribution spatiale et de son spin. Détaillons deux d'entre eux:
+</p>
+
+<p style="text-align: justify;">
+   <strong>Nombre quantique principal (n)</strong>: ce nombre décrit le niveau d'énergie principal ou la coquille dans laquelle réside l'électron. Des valeurs élevées de <strong>n</strong> correspondent à des niveaux d'énergie plus élevés et à une plus grande distance moyenne de l'électron par rapport au noyau, ce qui augmente le rayon atomique. La valeur de <strong>n</strong> peut être n'importe quel nombre entier positif (par exemple, 1, 2, 3...).
+</p>
+
+<p style="text-align: justify;">
+   <strong>Nombre quantique angulaire (l)</strong>: Également appelé nombre quantique orbital, cette valeur détermine la forme de l'orbite de l'électron et le type de sous-coquille. Les valeurs de <strong>l</strong> correspondent à des types d'orbitales spécifiques: 0 pour les orbitales s, 1 pour les orbitales p, 2 pour les orbitales d et 3 pour les orbitales f.
+</p>
+
+<p style="text-align: justify;">
+    Le processus d'affectation des électrons aux orbitales n'est pas aléatoire, mais suit une série de principes établis de mécanique quantique. Examinons l'une des règles clés qui régissent ce processus:
+</p>
+
+<p style="text-align: justify;">
+   <strong>La règle de Klechkowski (règle n+l)</strong>. Cette règle fournit l'ordre spécifique et systématique de remplissage des orbitales. Elle stipule que les orbitales sont remplies dans l'ordre croissant des valeurs (n+l). Une condition secondaire de la règle résout les égalités: si deux orbitales ont la même valeur (n+l), celle dont le nombre quantique principal n est le plus faible est remplie en premier. Par exemple, l'orbitale 3d (n=3, l=2) et l'orbitale 4p (n=4, l=1) ont toutes deux une valeur (n+l) de 5, mais comme n=3 pour l'orbitale 3d est inférieur à n=4 pour l'orbitale 4p, l'orbitale 3d est remplie en premier.
+</p>
+
+<p style="text-align: justify;">
+    Le processus de création de la notation des gaz rares est un algorithme systématique en plusieurs étapes qui s'appuie sur le numéro atomique (avec un exemple pour l'aluminium).
+</p>
+
+<ul>
+    <li>
+        <p style="text-align: justify;">
+           <strong>Déterminer le nombre d'électrons</strong>: Le nombre total d'électrons est égal au numéro atomique (Z) de l'élément (<code>ATOMIC_NUMBERS</code> dictionnaire des symboles de certains éléments et de leurs numéros atomiques).
+        </p>
+        <p style="text-align: justify;"><i>
+            L'aluminium (Al) a un numéro atomique (Z) de 13. Cela signifie qu'un atome d'aluminium neutre possède 13 électrons.
+        </i></p>
+    </li>
+    <li>
+        <p style="text-align: justify;">
+           <strong>Identifiez le noyau des gaz rares</strong>: Consultez un ensemble de référence de gaz nobles - hélium, néon, argon, krypton, xénon, radon, ununoctium (<code>NOBLE_GASES</code> liste des symboles) - et trouvez celui dont le numéro atomique le plus élevé est inférieur au Z de l'élément cible. Le nombre d'électrons représentés par ce noyau est soustrait du nombre total d'électrons pour déterminer les électrons restants qui doivent être remplis.
+        </p>
+        <p style="text-align: justify;"><i>
+            Pour l'aluminium (Z=13), le gaz rare le plus proche ayant un numéro atomique inférieur est le néon (Ne, Z=10). La notation commence donc par [Ne] et il reste 3 électrons à placer (13 - 10 = 3).
+        </i></p>
+    </li>
+    <li>
+        <p style="text-align: justify;">
+            Les électrons restants sont ajoutés aux orbitales dans l'ordre spécifié par la <strong>règle de Klechkowski (règle n+l)</strong>. L'algorithme doit itérer à travers la séquence d'orbitales (ordre spdf), en remplissant chacune d'elles à sa capacité maximale (<code>ORBITAL_CAPACITIES</code> dictionnaire des orbitales et de leurs capacités) jusqu'à ce que tous les électrons restants soient placés.
+        </p>
+        <p style="text-align: justify;"><i>
+            La configuration électronique du néon est <sup>1s22s22p6</sup>. L'orbitale ayant la valeur n+l la plus faible après 2p (2+1=3) est l'orbitale 3s (3+0=3). L'orbitale 3s peut contenir un maximum de 2 électrons. Comme il nous reste 3 électrons, nous plaçons 2 électrons dans cette orbitale, ce qui donne <sup>3s2</sup>. Il nous reste maintenant 1 électron. La prochaine orbitale à remplir est l'orbitale 3p (3+1=4). L'orbitale 3p peut contenir un maximum de 6 électrons. Comme il ne reste qu'un seul électron, nous le plaçons ici, ce qui donne <sup>3p1</sup>. Les 13 électrons ont été comptabilisés (10 du noyau de Néon + 2 dans l'orbitale 3s + 1 dans l'orbitale 3p).
+        </i></p>
+    </li>
+</ul>
+
+<p style="text-align: justify;">
+    La chaîne de notation finale du gaz rare doit être construite en concaténant le noyau du gaz rare avec les termes orbitaux séquentiels, chacun d'entre eux devant inclure le nombre quantique principal, la lettre représentant le type d'orbitale (s, p, d, f), et le nombre d'électrons dans cette orbitale. Chaque terme doit être séparé par un espace pour plus de clarté.
+</p>
+
+<p style="text-align: justify;"><i>
+    Pour l'aluminium, la notation complète des gaz rares est <code>"[Ne] 3s2 3p1"</code>.
+</i></p>
+
+<!-- <p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}example.png" alt="example" style="max-height: 83px"/>
+</p> -->
+
+<!-- Explain input and output values -->
+<p>
+   <strong>Entrée:</strong> Symbole de l'élément sous forme de chaîne de caractères <span>(str{% if is_js %}ing{% endif %})</span>.
+</p>
+
+<p>
+   <strong>Sortie:</strong> Notation des gaz rares sous forme de chaîne de caractères. 
+</p>
+
+
+<p>
+    <strong>Exemples:</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain how it can be used in development -->
+<!-- The section is optional -->
+<!-- <p class="for_info_only">
+
+    <strong>How it’s used:</strong>
+    <i>(math is used everywhere)</i>
+</p> -->
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<!-- <p>
+    <strong>Preconditions:</strong>
+    <ul>
+    <li><i>both given ints should be between -1000 and 1000</i></li>
+    </ul>
+</p> -->
