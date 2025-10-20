@@ -1,0 +1,105 @@
+<!-- Describe task in general -->
+<img src="{{MEDIA_CONVERT}}title.png" class="title_img" />
+<p style="text-align: justify;">
+    电子构型是描述原子轨道中电子排列的标准化符号方法。这项工作需要一种特定的速记形式，即 "惰性气体符号"。这种符号通过在括号中使用前一种惰性气体元素（如果存在）的符号来代替核心，从而提供了一种浓缩表示法。其余电子则以标准配置格式列出。
+</p>
+
+<p style="text-align: justify;"><i>
+    例如，氖（Ne）的原子序数为 10，完整构型为 1<sup>s22s22p6</sup>。因此，氩（Ar，Z=18）的惰性气体符号为[Ne]3<sup>s23p6</sup>，因为[Ne]核心占前十个电子，其余八个电子填入 3s 和 3p 子壳。
+</i></p>
+
+<p style="text-align: justify;">
+    原子中电子的状态由一组四个量子数精确描述。这些数字是每个电子的唯一 "地址"，全面描述了电子的能量、空间分布和自旋。让我们分解其中的两个：
+</p>
+
+<p style="text-align: justify;">
+   <strong>主量子数（n）</strong>：这个数字描述了电子所在的主要能级或外壳。<strong>n</strong>值越大，能级越高，电子与原子核的平均距离越大，原子半径也就越大。<strong>n</strong>的值可以是任何正整数（如 1、2、3......）。
+</p>
+
+<p style="text-align: justify;">
+   <strong>角量子数 (l)：</strong>也称为轨道量子数，该值决定了电子轨道的形状和子壳的类型。<strong>l</strong>的值与特定的轨道类型相对应：0 代表 s 轨道，1 代表 p 轨道，2 代表 d 轨道，3 代表 f 轨道。
+</p>
+
+<p style="text-align: justify;">
+    将电子分配到轨道的过程并不是随机的，而是遵循一系列既定的量子力学原理。让我们来探讨支配这一过程的关键规则之一：
+</p>
+
+<p style="text-align: justify;">
+   <strong>克莱科夫斯基规则（n+l 规则）</strong>。这条规则为填充轨道提供了具体、系统的顺序。它规定，轨道按照 (n+l) 值递增的顺序填充。该规则的次要条件是解决并列问题：如果两个轨道的 (n+l) 值相同，则先填充主量子数 n 较小的轨道。例如，3d 轨道（n=3，l=2）和 4p 轨道（n=4，l=1）的 (n+l) 值都是 5，但由于 3d 轨道的 n=3 低于 4p 轨道的 n=4，所以先填充 3d 轨道。
+</p>
+
+<p style="text-align: justify;">
+    惰性气体符号的生成过程是一个以原子序数为基础的系统化、多步骤算法（以铝为例）。
+</p>
+
+<ul>
+    <li>
+        <p style="text-align: justify;">
+           <strong>确定电子数</strong>：电子总数等于元素的原子序数 (Z) (<code>ATOMIC_NUMBERS</code> 部分元素符号及其原子序数字典)。
+        </p>
+        <p style="text-align: justify;"><i>
+            铝（Al）的原子序数（Z）为 13。这意味着一个中性铝原子有 13 个电子。
+        </i></p>
+    </li>
+    <li>
+        <p style="text-align: justify;">
+           <strong>识别惰性气体核心</strong>：参考惰性气体氦气、氖气、氩气、氪气、氙气、氡气、ununoctium（<code>NOBLE_GASES</code> 符号列表），找出原子序数最高且小于目标元素 Z 的惰性气体。从电子总数中减去该核心所代表的电子数，就可以确定需要填充的剩余电子数。
+        </p>
+        <p style="text-align: justify;"><i>
+            对于铝（Z=13），原子序数较低的惰性气体是氖（Ne，Z=10）。因此，符号以[Ne]开头，我们还有 3 个电子需要填充（13 - 10 = 3）。
+        </i></p>
+    </li>
+    <li>
+        <p style="text-align: justify;">
+            剩余的电子将按照<strong>克莱希科夫斯基规则（n+l 规则）</strong>规定的顺序添加到轨道中。算法必须遍历轨道序列（spdf 顺序），将每个轨道填满到其最大容量（<code>ORBITAL_CAPACITIES</code> 轨道及其容量字典），直到所有剩余电子填满为止。
+        </p>
+        <p style="text-align: justify;"><i>
+            氖的电子构型为 1<sup>s22s22p6</sup>。在 2p（2+1=3）之后，具有次低 n+l 值的轨道是 3s 轨道（3+0=3）。3s 轨道最多可容纳 2 个电子。我们还剩下 3 个电子，因此在这里放置 2 个电子，结果是 3<sup>s2</sup>。现在我们还剩下 1 个电子。下一个要填充的轨道是 3p 轨道（3+1=4）。3p 轨道最多可容纳 6 个电子。我们只剩下 1 个电子，所以把它放在这里，结果是<sup>3</sup>p1。至此，所有 13 个电子都已填满（10 个氖核电子 + 2 个 3s 轨道电子 + 1 个 3p 轨道电子）。
+        </i></p>
+    </li>
+</ul>
+
+<p style="text-align: justify;">
+    最后的惰性气体符号字符串应由惰性气体核心和连续的轨道项组成，每个轨道项必须包括主量子 数、代表轨道类型（s、p、d、f）的字母以及该轨道中的电子数。为清晰起见，每个项之间应隔一空格。
+</p>
+
+<p style="text-align: justify;"><i>
+    对于铝，完整的惰性气体符号是<code>"[Ne] 3s2 3p1"</code> 。
+</i></p>
+
+<!-- <p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}example.png" alt="example" style="max-height: 83px"/>
+</p> -->
+
+<!-- Explain input and output values -->
+<p>
+   <strong>输入：</strong>元素符号字符串 <span>(str{% if is_js %}ing{% endif %})</span>.
+</p>
+
+<p>
+   <strong>输出：</strong>惰性气体符号字符串 
+</p>
+
+
+<p>
+    <strong>示例</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain how it can be used in development -->
+<!-- The section is optional -->
+<!-- <p class="for_info_only">
+
+    <strong>How it’s used:</strong>
+    <i>(math is used everywhere)</i>
+</p> -->
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<!-- <p>
+    <strong>Preconditions:</strong>
+    <ul>
+    <li><i>both given ints should be between -1000 and 1000</i></li>
+    </ul>
+</p> -->
