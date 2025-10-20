@@ -1,0 +1,105 @@
+<!-- Describe task in general -->
+<img src="{{MEDIA_CONVERT}}title.png" class="title_img" />
+<p style="text-align: justify;">
+    Die Elektronenkonfiguration ist eine standardisierte Notationsmethode zur Beschreibung der Anordnung der Elektronen in den Orbitalen eines Atoms. Diese Aufgabe erfordert eine spezielle Kurzschrift, die als Edelgasnotation bekannt ist. Diese Notation bietet eine komprimierte Darstellung, indem das Symbol des vorherigen Edelgaselements (falls vorhanden) in Klammern als Ersatz für den Kern verwendet wird. Die verbleibenden Elektronen werden dann im Format der Standardkonfiguration aufgeführt.
+</p>
+
+<p style="text-align: justify;"><i>
+    Zum Beispiel hat Neon (Ne) eine Ordnungszahl von 10 und eine vollständige Konfiguration von <sup>1s22s22p6</sup>. Die Edelgasnotation für Argon (Ar, Z=18) lautet daher [Ne]<sup>3s23p6</sup>, da die ersten zehn Elektronen auf den [Ne]-Kern entfallen und die verbleibenden acht in die 3s und 3p Unterschalen gefüllt werden.
+</i></p>
+
+<p style="text-align: justify;">
+    Der Zustand eines Elektrons innerhalb eines Atoms wird durch eine Reihe von vier Quantenzahlen genau beschrieben. Diese Zahlen dienen als eindeutige "Adresse" für jedes Elektron und liefern eine umfassende Beschreibung seiner Energie, seiner räumlichen Verteilung und seines Spins. Lassen Sie uns zwei von ihnen aufschlüsseln:
+</p>
+
+<p style="text-align: justify;">
+   <strong>Hauptquantenzahl (n)</strong>: Diese Zahl beschreibt das Hauptenergieniveau oder die Schale, in der sich das Elektron befindet. Höhere Werte von <strong>n</strong> entsprechen höheren Energieniveaus und einem größeren durchschnittlichen Abstand des Elektrons vom Kern, wodurch sich der Atomradius vergrößert. Der Wert von <strong>n</strong> kann eine beliebige positive ganze Zahl sein (z.B. 1, 2, 3...).
+</p>
+
+<p style="text-align: justify;">
+   <strong>Winkelquantenzahl (l)</strong>: Auch bekannt als Orbitalquantenzahl, bestimmt dieser Wert die Form des Elektronenorbitals und die Art der Unterschale. Die Werte von <strong>l</strong> entsprechen bestimmten Orbitalformen: 0 für s-Orbitale, 1 für p-Orbitale, 2 für d-Orbitale und 3 für f-Orbitale.
+</p>
+
+<p style="text-align: justify;">
+    Die Zuweisung der Elektronen zu den Orbitalen erfolgt nicht zufällig, sondern folgt einer Reihe von etablierten quantenmechanischen Prinzipien. Schauen wir uns eine der wichtigsten Regeln an, die diesen Prozess steuern:
+</p>
+
+<p style="text-align: justify;">
+   <strong>Die Klechkowski-Regel (n+l-Regel)</strong>. Diese Regel gibt die spezifische, systematische Reihenfolge für das Auffüllen von Orbitalen vor. Sie besagt, dass Orbitale in der Reihenfolge zunehmender (n+l) Werte aufgefüllt werden. Eine Nebenbedingung der Regel löst Unstimmigkeiten auf: Wenn zwei Orbitale den gleichen (n+l) Wert haben, wird dasjenige mit der niedrigeren Hauptquantenzahl n zuerst aufgefüllt. Zum Beispiel haben das 3d-Orbital (n=3, l=2) und das 4p-Orbital (n=4, l=1) beide einen (n+l)-Wert von 5, aber da n=3 für das 3d-Orbital niedriger ist als n=4 für das 4p-Orbital, wird das 3d-Orbital zuerst gefüllt.
+</p>
+
+<p style="text-align: justify;">
+    Der Prozess zur Erzeugung der Edelgasnotation ist ein systematischer, mehrstufiger Algorithmus, der auf der Ordnungszahl aufbaut (mit Beispiel für Aluminium).
+</p>
+
+<ul>
+    <li>
+        <p style="text-align: justify;">
+           <strong>Bestimmen Sie die Elektronenzahl</strong>: Die Gesamtzahl der Elektronen ist gleich der Ordnungszahl (Z) des Elements (<code>ATOMIC_NUMBERS</code> Wörterbuch einiger Elementsymbole und ihrer Ordnungszahlen).
+        </p>
+        <p style="text-align: justify;"><i>
+            Aluminium (Al) hat eine Ordnungszahl (Z) von 13. Das bedeutet, dass ein neutrales Aluminiumatom 13 Elektronen hat.
+        </i></p>
+    </li>
+    <li>
+        <p style="text-align: justify;">
+           <strong>Identifizieren Sie den Edelgaskern</strong>: Ziehen Sie eine Referenzmenge der Edelgase Helium, Neon, Argon, Krypton, Xenon, Radon und Ununoctium zu Rate (<code>NOBLE_GASES</code> Liste der Symbole) und finden Sie das Edelgas mit der höchsten Ordnungszahl, die kleiner ist als das Z des Zielelements. Das Symbol dieses Edelgases, das in Klammern steht, wird zum Anfang der Notation. Die Anzahl der Elektronen, die durch diesen Kern repräsentiert werden, wird von der Gesamtelektronenzahl abgezogen, um die verbleibenden Elektronen zu bestimmen, die aufgefüllt werden müssen.
+        </p>
+        <p style="text-align: justify;"><i>
+            Für Aluminium (Z=13) ist das nächstgelegene Edelgas mit einer niedrigeren Ordnungszahl Neon (Ne, Z=10). Die Notation beginnt also mit [Ne], und wir haben noch 3 Elektronen übrig (13 - 10 = 3).
+        </i></p>
+    </li>
+    <li>
+        <p style="text-align: justify;">
+            Die verbleibenden Elektronen werden den Orbitalen in der durch die <strong>Klechkowski-Regel (n+l-Regel)</strong> festgelegten Reihenfolge hinzugefügt. Der Algorithmus muss die Reihenfolge der Orbitale (spdf-Reihenfolge) durchlaufen und jedes Orbital bis zu seiner maximalen Kapazität füllen (<code>ORBITAL_CAPACITIES</code> Wörterbuch der Orbitale und ihrer Kapazitäten), bis alle verbleibenden Elektronen platziert sind.
+        </p>
+        <p style="text-align: justify;"><i>
+            Die Elektronenkonfiguration für Neon ist <sup>1s22s22p6</sup>. Das Orbital mit dem nächst niedrigeren n+l-Wert nach 2p (2+1=3) ist das 3s-Orbital (3+0=3). Das 3s-Orbital kann maximal 2 Elektronen aufnehmen. Wir haben 3 Elektronen übrig, also platzieren wir 2 Elektronen hier, was zu <sup>3s2</sup> führt. Jetzt haben wir noch 1 Elektron übrig. Das nächste zu besetzende Orbital ist das 3p-Orbital (3+1=4). Das 3p-Orbital kann maximal 6 Elektronen aufnehmen. Da wir nur noch 1 Elektron übrig haben, platzieren wir es hier, was zu <sup>3p1</sup> führt. Alle 13 Elektronen sind nun berücksichtigt (10 aus dem Neonkern + 2 im 3s-Orbital + 1 im 3p-Orbital).
+        </i></p>
+    </li>
+</ul>
+
+<p style="text-align: justify;">
+    Die endgültige Edelgasnotation besteht aus der Verkettung des Edelgaskerns mit den aufeinanderfolgenden Orbitalbegriffen, die jeweils die Hauptquantenzahl, den Buchstaben für den Orbital-Typ (s, p, d, f) und die Anzahl der Elektronen in diesem Orbital enthalten müssen. Jeder Begriff sollte durch ein Leerzeichen getrennt werden, um die Übersichtlichkeit zu gewährleisten.
+</p>
+
+<p style="text-align: justify;"><i>
+    Für Aluminium lautet die vollständige Edelgasschreibweise <code>"[Ne] 3s2 3p1"</code>.
+</i></p>
+
+<!-- <p style="text-align: center;">
+    <img  title="example" src="{{MEDIA}}example.png" alt="example" style="max-height: 83px"/>
+</p> -->
+
+<!-- Explain input and output values -->
+<p>
+   <strong>Eingabe:</strong> Symbol des Elements als Zeichenkette <span>(str{% if is_js %}ing{% endif %})</span>.
+</p>
+
+<p>
+   <strong>Ausgabe:</strong> Edelgasnotation als String. 
+</p>
+
+
+<p>
+    <strong>Beispiele:</strong>
+</p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain how it can be used in development -->
+<!-- The section is optional -->
+<!-- <p class="for_info_only">
+
+    <strong>How it’s used:</strong>
+    <i>(math is used everywhere)</i>
+</p> -->
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<!-- <p>
+    <strong>Preconditions:</strong>
+    <ul>
+    <li><i>both given ints should be between -1000 and 1000</i></li>
+    </ul>
+</p> -->
